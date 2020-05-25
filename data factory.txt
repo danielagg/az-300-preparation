@@ -8,3 +8,24 @@ Data FActory
 
 SQL datawarehouse: concurrent connections can be an issue (100 or so)
 azure synapse analytics: 10,000 concurrent connections
+
+---------------
+
+COMPONENTS:
+linked service: ADF connect to data stores, or compute resources
+
+Dataset: we define this, the end result
+
+Activity: performs action on data, feeds the dataset
+- usually there's more than 1
+
+
+Pipeline: activities grouped together
+- trigger, schedule this
+
+
+Parameters
+Integration runtime
+Control flow
+
+---------------
