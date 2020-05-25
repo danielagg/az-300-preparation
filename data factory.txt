@@ -29,3 +29,16 @@ Integration runtime
 Control flow
 
 ---------------
+
+We could do:
+- on prem SQL server -> ADF to ingest data -> Data Lake -> Synapse Analytics
+- on prem SQL server -> ADF to ingest data -> Synapse Analytics (we can skip data lake)
+
+
+Copy activity: grab data from the source, do some business logic if necessary and dump it into the sink (destination)
+- we can use auto Integration Runtime (it discovers whether we are doing cloud to sink or onprem to sink)
+
+NOTE: preprocess data before doing this, because:
+- compressed data files is more efficient (no serialization/deserialization)
+
+
