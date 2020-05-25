@@ -1,0 +1,10 @@
+Data FActory
+- data movement
+- data transformation
+
+1) do transformation ourselves within Data Factory
+2) call another service to do that on ADF's behalf
+
+
+SQL datawarehouse: concurrent connections can be an issue (100 or so)
+azure synapse analytics: 10,000 concurrent connections
