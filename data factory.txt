@@ -42,3 +42,19 @@ NOTE: preprocess data before doing this, because:
 - compressed data files is more efficient (no serialization/deserialization)
 
 
+------------
+
+TRANSFORM DATA
+
+- SSIS packages: use on prem SQL stuff we already invested in
+- mapping data flow: codeless data transform
+-- Spark execution, no need to worry about infrastructure
+
+
+
+
+
+
+
+
+
