@@ -1,0 +1,82 @@
+az login --subscription "Name of my subscription"
+
+az group create \
+  --name "name-of-new-resource-group" \
+  --location "centralus"
+
+az network vnet create \
+  --resource-group "name-of-new-resource-group" \
+  --name  "name-of-new-virtual-network" \
+  --address-prefix "10.1.0.0/16" \
+  --subnet-name "name-of-new-subnet" \
+  --subnet-prefix "10.1.1.0/24" \
+
+# Useful: List virtual networks
+az network vnet list -o table
+
+# Useful: Check if private IP address is available for use within a VNet:
+az network vnet check-ip-address \
+  -g "name-of-new-resource-group"
+  -n "name-of-new-vnet"
+  --ip-address 10.0.0.4
+
+az network public-ip create \
+  -g "name-of-new-resource-group" \
+  -n "name-of-new-ip-address"
+
+# List network security groups, then create new
+az network nsg list -o table
+
+az network nsg create \
+  -g "name-of-new-resource-group" \
+  -n "name-of-new-network-security-group"
+
+# Create Virtual Network Interface, associate with:
+# 1) IP address
+# 2) Network Sec. Group
+az network nic create \
+ -g "name-of-new-resource-group" \
+ -n "name-of-new-nic" \
+ --vnet-name "name-of-new-virtual-network"
+ --subnet "name-of-new-subnet" \
+ --network-security-group "name-of-new-network-security-group"
+ --public-ip-address "name-of-new-ip-address"
+
+az network nic list -o table
+
+az vm create \
+  -g "name-of-new-resource-group" \
+  -l "centralus" \
+  -n "name-of-new-vm" \
+  --nics "name-of-new-nic"
+  --image "rhel" \
+  --admin-username "demo-admin" \
+  --authentication-type "ssh" \
+  --ssh-key-value ~/.ssh/id_rsa.pub
+
+az vm open-port \
+  -g "name-of-new-resource-group" \
+  -n "name-of-new-vm" \
+  --port "22"
+
+az vm list-ip-addresses \
+  -n "name-of-new-vm"
+  -o table
+
+# SSH into VM with the returned IP:
+ssh -l demoadmin nnn.nn.nnn.nn
+
+
+az vm create --help | more
+
+az keyvault create \
+  --name "<your-unique-keyvault-name>" \
+  --resource-group "myResourceGroup" \
+  --location "eastus" \
+  --enabled-for-disk-encryption
+
+az vm encryption enable \
+  -g "MyResourceGroup" \
+  -n "myVM" \
+  --disk-encryption-keyvault "<your-unique-keyvault-name>"
+
